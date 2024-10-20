@@ -1,56 +1,79 @@
-.App {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
-  font-family: Arial, sans-serif;
-  background-image: url('C:\Users\suresh\Downloads\pexels-padrinan-255379.jpg');
-  background-size: cover;
-  width: 100%;
-  height:100vh ;
-}
-input[type="text"] {
-  padding: 10px;
-  width: 100%;
-  max-width: 400px; 
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-button {
-  padding: 10px 15px;
-  border: none;
-  background-color: #007bff;
-  color: white;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-button:hover {
-  background-color: #0056b3;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-  width: 100%;
-  max-width: 400px; 
-}
-li {
-  display: flex;
-  justify-content: space-between;
-  padding: 10px;
-  border-bottom: 1px solid #ccc;
-}
-@media (max-width: 600px) {
-  input[type="text"], button {
-    width: 90%; 
+* {
+    box-sizing: border-box; 
   }
-  h3 {
-    font-size: 1.2em; 
+  
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif; 
   }
-}
-@media (max-width: 400px) {
-  h3 {
-    font-size: 1em; 
+  
+  .hi {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+    gap: 10px; 
+    padding: 10px; 
   }
-}
+  
+  .hlo {
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    background-color: #f4f4f4; 
+    border: 1px solid #ddd; 
+    border-radius: 5px;
+    padding: 10px; 
+  }
+  
+  .how {
+    height: 200px;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 5px; 
+  }
+  
+  .hints {
+    list-style: none; 
+    padding: 0;
+    text-align: center; 
+    margin: 10px 0; 
+  }
+  
+  .input {
+    padding: 10px;
+    margin-top: 10px; 
+    width: 100%; 
+    max-width: 300px; 
+    border: 1px solid #ccc; 
+    border-radius: 5px; 
+  }
+  @media (max-width: 600px) {
+    .how {
+      height: 150px; 
+    }
+  
+    .input {
+      max-width: 100%; 
+    }
+  }
+  h2 {
+    text-align: center; 
+    margin: 20px 0;    
+    padding: 0 15px;  
+    font-size: 24px;  
+  }
+
+  @media (min-width: 600px) {
+    h2 {
+      font-size: 28px; 
+      margin: 30px 0;   
+    }
+  }
+  @media (min-width: 900px) {
+    h2 {
+      font-size: 32px;  
+      max-width: 800px; 
+      margin-left: auto; 
+      margin-right: auto; 
+    }
+  }
+  

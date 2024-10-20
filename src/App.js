@@ -1,72 +1,62 @@
+import React, { useEffect, useState } from 'react';
+import Data from './app.json';
 import './App.css';
-import { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheckCircle, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 
-function App() {
-  const [tasks, setTasks] = useState([]);
-  const [task, setTask] = useState('');
-  const [userTime, setUserTime] = useState(''); 
+const App = () => {
+  const [data, setData] = useState([]);
+  const [feedback, setFeedback] = useState({}); 
 
-  const handleInputChange = (event) => {
-    setTask(event.target.value);
-  };
+  useEffect(() => {
+    setData(Data);
+  }, []);
 
-  const handleTimeChange = (event) => {
-    setUserTime(event.target.value);
-  };
-
-  const handleAddTask = () => {
-    if (task) {
-      const date = new Date();
-      const hours = date.getHours();
-      const minutes = date.getMinutes();
-      const formattedTime = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
-      setTasks([...tasks, { task, userTime, createdAt: formattedTime }]);
-      setTask(''); 
-      setUserTime(''); 
+  const handleKeyDown = (e, correctAnswer, index) => {
+    if (e.key === 'Enter') {
+      const inputValue = e.target.value;
+      setFeedback((prev) => ({
+        ...prev,
+        [index]: inputValue === correctAnswer ? "correct" : "wrong"
+      }));
     }
   };
 
-  const handleDeleteTask = (index) => {
-    const newTasks = tasks.filter((_, taskIndex) => taskIndex !== index);
-    setTasks(newTasks);
-  };
-
   return (
-    <div className="App">
-      <h3 id='hi'>Enter Task</h3>
-      <input
-        type="text"
-        value={task}
-        onChange={handleInputChange}
-        placeholder='Enter Task'
-      />
-      <input
-        type="time"
-        value={userTime}
-        onChange={handleTimeChange}
-      /><br></br>
-      <button id='team' onClick={handleAddTask}>Add Task</button>
-      {tasks.length > 0 ? (
-        <b>
-          <ul>
-            {tasks.map((item, index) => (
-              <li key={index}>
-                {item.task} (Time: {item.userTime}) <span style={{ fontStyle: 'italic', marginLeft: '10px', color: 'gray' }}>{item.createdAt}</span>
-                <i
-                  className="fa fa-trash"
-                  aria-hidden="true"
-                  onClick={() => handleDeleteTask(index)}
-                  style={{ cursor: 'pointer', marginLeft: '10px', color: 'red' }}
-                ></i>
-              </li>
-            ))}
+    <div>
+      <h2>Find who i am</h2>
+    <div className='hi'>
+      {data.map((item, index) => (
+        <div className='hlo' key={index}>
+          <img src={item.image} alt={`Image of ${item.Hint1}`} className='how' />
+          <ul className='hints'>
+            <li>{item.Hint1}</li>
+            <li>{item.Hint2}</li>
+            <li>{item.Hint3}</li>
+            <li>
+              {feedback[index] === "correct" && (
+                <FontAwesomeIcon icon={faCheckCircle} style={{ color: 'green' }} />
+              )}
+              {feedback[index] === "wrong" && (
+                <FontAwesomeIcon icon={faTimesCircle} style={{ color: 'red' }} />
+              )}
+            </li>
           </ul>
-        </b>
-      ) : (
-        <h3 id='hi'>No Task Added</h3>
-      )}
+          <input
+            type='text'
+            placeholder='Enter here'
+            onKeyDown={(e) => handleKeyDown(e, item.Answer, index)} 
+            className='input'
+          />
+          <br />
+        </div>
+      ))}
+      <div>
+        <h2 id='vv'>Thanks for play</h2>
+      </div>
+    </div>
     </div>
   );
-}
+};
 
 export default App;
