@@ -23,7 +23,7 @@ const App = () => {
   };
 
   return (
-    <div>
+    <div className='love'>
       <h2>Find who i am</h2>
     <div className='hi'>
       {data.map((item, index) => (
